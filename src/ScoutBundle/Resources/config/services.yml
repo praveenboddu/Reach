@@ -1,0 +1,4 @@
+services:
+#    scout.example:
+#        class: ScoutBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

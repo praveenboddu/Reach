@@ -1,0 +1,7 @@
+services:
+    beacon.service:
+        class: BeaconBundle\Service\BeaconService
+        arguments: [@doctrine.orm.entity_manager]
+    locale.service:
+        class: BeaconBundle\Service\LocaleService
+        arguments: [@doctrine.orm.entity_manager]

@@ -1,0 +1,8 @@
+beacon:
+    type: rest
+    resource: BeaconBundle\Controller\BeaconController
+    prefix: /v1/
+locale:
+    type: rest
+    resource: BeaconBundle\Controller\LocaleController
+    prefix: /v1/
