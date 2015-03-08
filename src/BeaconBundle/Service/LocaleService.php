@@ -4,8 +4,8 @@ namespace BeaconBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use BeaconBundle\Entity\Locale;
-//use Symfony\Component\HttpFoundation\JsonResponse as Response;
-use Scout\Common\Service\Response as Response;
+use Symfony\Component\HttpFoundation\JsonResponse as Response;
+//use Scout\Common\Service\Response as Response;
 
 class LocaleService
 {
@@ -18,22 +18,22 @@ class LocaleService
 
     public function create($data)
     {
-        $localeEntity = new Beacon();
+        $localeEntity = new Locale();
         $localeEntity->setName($data['name']);
         $localeEntity->setLocation($data['location']);
         $localeEntity->setClientId($data['clientId']);
 
-        $this->em->persist($beaconEntity);
+        $this->em->persist($localeEntity);
         $this->em->flush();
 
-        return new Response($beaconEntity->getId());
+        return new Response($localeEntity->getId());
     }
 
     public function get($id)
     {
         $response = new Response;
-        $event = $this->em->getRepository('BeaconBundle:Beacon')->find($id);
-        return $response->setData($event);
+        $event = $this->em->getRepository('BeaconBundle:Locale')->find($id);
+        return $response->setData($event->toArray());
     }
 
 }

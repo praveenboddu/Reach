@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="locales")
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
  */
-class Beacon
+class Locale
 {
     /**
      * @var integer
@@ -81,7 +81,7 @@ class Beacon
      */
     public function setName($name)
     {
-        $this->location = $location;
+        $this->name = $name;
 
         return $this;
     }
@@ -150,6 +150,17 @@ class Beacon
     public function getCreated()
     {
         return $this->created;
+    }
+
+    public function toArray()
+    {
+        $data = array();
+        $data['id'] = $this->getId();
+        $data['name'] = $this->getName();
+        $data['location'] = $this->getLocation();
+        $data['clientId'] = $this->getClientId();
+        $data['created'] = $this->getCreated()->format('Y-m-d H:i:s');
+        return $data;
     }
 
     /**
