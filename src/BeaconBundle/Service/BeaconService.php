@@ -4,8 +4,8 @@ namespace BeaconBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use BeaconBundle\Entity\Beacon;
-//use Symfony\Component\HttpFoundation\JsonResponse as Response;
-use Scout\Common\Service\Response as Response;
+use Symfony\Component\HttpFoundation\JsonResponse as Response;
+//use Scout\Common\Service\Response as Response;
 
 class BeaconService
 {
@@ -32,7 +32,7 @@ class BeaconService
     {
         $response = new Response;
         $event = $this->em->getRepository('BeaconBundle:Beacon')->find($id);
-        return $response->setData($event);
+        return $response->setData($event->toArray());
     }
 
 }
