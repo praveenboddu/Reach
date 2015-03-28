@@ -2,8 +2,10 @@ security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
         UserBundle\Entity\User: bcrypt
+
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER]
+
     providers:
         chain_provider:
             chain:
@@ -13,8 +15,24 @@ security:
                 users:
                     admin: { password: adminpass, roles: ROLE_ADMIN}
         user_db:
-            entity: { class: UserBundle:User, property: username }
+            id: platform.user.provider
+
     firewalls:
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: user_db
+                check_path: _security_check
+                login_path: _demo_login
+            anonymous: true
+        api:
+            pattern:    ^/v1
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false # can be omitted as its default value
         main:
             pattern: /.*
             form_login:
@@ -26,7 +44,9 @@ security:
                 target: /
             security: true
             anonymous: true
+
     access_control:
+        - { path: ^/v1, roles: [ IS_AUTHENTICATED_FULLY ] }
         - { path: /login, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /user, roles:  ROLE_ADMIN }
         - { path: /.*, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
