@@ -33,7 +33,6 @@ Class Response
 
 	public function setData($data)
 	{
-		var_dump('im here');
 		$this->data = $data;
 	}
 
