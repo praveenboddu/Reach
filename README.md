@@ -15,6 +15,4 @@ Check if it works:
     
 If you see response like this one, then we did everything correctly: ```{"access_token":"YTk0YTVjZDY0YWI2ZmE0NjRiODQ4OWIyNjZkNjZlMTdiZGZlNmI3MDNjZGQwYTZkMDNiMjliNDg3NWYwZWI0MQ","expires_in":3600,"token_type":"bearer","scope":"user","refresh_token":"ZDU1MDY1OTc4NGNlNzQ5NWFiYTEzZTE1OGY5MWNjMmViYTBiNmRjOTNlY2ExNzAxNWRmZTM1NjI3ZDkwNDdjNQ"}```
 
-Then, you can access API providing access_token as a parameter:
-
-```http://reach.local/v1/beaconevents?access_token=YTk0YTVjZDY0YWI2ZmE0NjRiODQ4OWIyNjZkNjZlMTdiZGZlNmI3MDNjZGQwYTZkMDNiMjliNDg3NWYwZWI0MQ```
+Then, you can access API providing access_token as a parameter: ```http://reach.local/v1/beaconevents?access_token=Yjk0YTFjZDFlYTIzMzhmZmEzNzAwYzM2NzhlNzg0MjM4Nzc1ZjcwMWIwOWM0OTk3NTFkNjEzNjEyMTBhOTA4Mw```
