@@ -57,7 +57,7 @@ class BeaconLocale
      *
      * @ORM\Column(name="created", type="datetime")
      * @Constraints\NotBlank
-     * @COnstraints\DateTime()
+     * @Constraints\DateTime()
      */
     private $created;
 
@@ -66,15 +66,15 @@ class BeaconLocale
      *
      * @ORM\Column(name="active_from", type="datetime")
      * @Constraints\NotBlank
-     * @COnstraints\DateTime()
+     * @Constraints\DateTime()
      */
     private $activeFrom;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="active_from", type="datetime")
-     * @COnstraints\DateTime()
+     * @ORM\Column(name="active_until", type="datetime")
+     * @Constraints\DateTime()
      */
     private $activeUntil;
 
