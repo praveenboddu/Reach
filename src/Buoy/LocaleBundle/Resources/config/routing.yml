@@ -1,0 +1,4 @@
+buoy_locale:
+    type: rest
+    resource: Buoy\LocaleBundle\Controller\LocaleController
+    prefix: /v1/

@@ -1,0 +1,4 @@
+buoy_audience:
+    type: rest
+    resource: Buoy\AudienceBundle\Controller\AudienceController
+    prefix: /v1/

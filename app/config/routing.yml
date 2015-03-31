@@ -1,5 +1,12 @@
+buoy_audience:
+    resource: "@BuoyAudienceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+buoy_locale:
+    resource: "@BuoyLocaleBundle/Resources/config/routing.yml"
+    prefix:   /
 scout_core:
-    resource: "@ScoutCoreBundle/Resources/config/routing.yml"
+    resource: "@BuoyCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
 beacon_event:

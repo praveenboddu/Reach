@@ -23,7 +23,9 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BeaconBundle\BeaconBundle(),
             new BeaconEventBundle\BeaconEventBundle(),
-            new Scout\CoreBundle\ScoutCoreBundle(),
+            new Buoy\LocaleBundle\BuoyLocaleBundle(),
+            new Buoy\CoreBundle\BuoyCoreBundle(),
+            new Buoy\AudienceBundle\BuoyAudienceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
