@@ -1,0 +1,4 @@
+services:
+    locale.service:
+        class: Buoy\LocaleBundle\Service\LocaleService
+        arguments: [@doctrine.orm.entity_manager]

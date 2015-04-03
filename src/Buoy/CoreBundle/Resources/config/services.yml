@@ -1,0 +1,9 @@
+services:
+    scout_core.serializer.handler.service_response:
+        class: Buoy\CoreBundle\Serializer\Handler\ServiceResponseHandler
+        tags:
+            - {name: jms_serializer.subscribing_handler}
+
+    scout_core.view_handler:
+        class: Buoy\CoreBundle\View\view_handler
+        parent: fos_rest.view_handler.default
