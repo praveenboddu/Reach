@@ -9,3 +9,4 @@ locale:
 security:
     resource: BeaconBundle\Controller\SecurityController
     prefix: /v1/
+    type: rest

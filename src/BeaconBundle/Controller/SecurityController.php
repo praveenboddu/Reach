@@ -3,17 +3,19 @@
 
 namespace BeaconBundle\Controller;
 
+use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use FOS\RestBundle\Controller\Annotations\Post;
 
-class SecurityController extends Controller
+class SecurityController extends FOSRestController
 {
     /**
-     * @Route("/auth", name="v1_auth")
+     * @Post("/auth")
      * Creates a security token for the user
      */
     public function tokenCreateAction(Request $request)
@@ -43,6 +45,6 @@ class SecurityController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return new JsonResponse(array("apiKey" => $user->getApiKey()));
+        return new JsonResponse(array("apikey" => $user->getApiKey()));
     }
 }
