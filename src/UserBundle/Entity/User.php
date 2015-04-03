@@ -48,13 +48,6 @@ class User implements UserInterface
      */
     private $apiKey;
 
-    /**
-     * @var string ApiKey
-     *
-     * @ORM\Column(name="api_key_expires", type="datetime", nullable=true)
-     */
-    private $apiKeyExpires;
-
     public function __construct()
     {
         $this->isActive = true;
@@ -153,10 +146,8 @@ class User implements UserInterface
 
     public function refreshToken()
     {
-        if ($this->isApiKeyExpired()) {
+        if ($this->apiKey == null) {
             $this->generateApiKey();
-        } else {
-            $this->prolongApiKeyExpiration();
         }
     }
 
@@ -170,22 +161,6 @@ class User implements UserInterface
         }
         $apikey = base64_encode(sha1(uniqid('ue' . rand(rand(), rand())) . $apikey));
         $this->apiKey = $apikey;
-        $this->apiKeyExpires = (new \DateTime())->modify("+1 hour");
     }
 
-    private function isApiKeyExpired()
-    {
-        if ($this->apiKeyExpires == null
-            || $this->apiKeyExpires->getTimestamp()-time() > 3600
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function prolongApiKeyExpiration()
-    {
-        $this->apiKeyExpires->modify("+1 hour");
-    }
 }
