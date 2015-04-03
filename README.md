@@ -1,8 +1,11 @@
 Reach
 ========================
 
+How to authenticate via API
+--------------
+Send POST request to http://reach.local/v1/auth providing ```username``` and ```password``` fields. In the response there should be "apikey" field. Then use this apikey for API requests: ```reach.local/v1/beacons?apikey=```
 
-How to set up OAuth authorization
+How to set up OAuth authorization (old, inactive)
 --------------
 ```php app/console acme:oauth-server:client:create --redirect-uri="http://reach.local/" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials"```
 
