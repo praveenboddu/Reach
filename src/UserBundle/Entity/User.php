@@ -41,6 +41,20 @@ class User implements UserInterface
      */
     private $salt;
 
+    /**
+     * @var string ApiKey
+     *
+     * @ORM\Column(name="api_key", type="string", length=128, nullable=true)
+     */
+    private $apiKey;
+
+    /**
+     * @var string ApiKey
+     *
+     * @ORM\Column(name="api_key_expires", type="datetime", nullable=true)
+     */
+    private $apiKeyExpires;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -124,8 +138,54 @@ class User implements UserInterface
         return array('ROLE_USER');
     }
 
+    /**
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
     public function eraseCredentials()
     {
 
+    }
+
+    public function refreshToken()
+    {
+        if ($this->isApiKeyExpired()) {
+            $this->generateApiKey();
+        } else {
+            $this->prolongApiKeyExpiration();
+        }
+    }
+
+
+    private function generateApiKey()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $apikey = '';
+        for ($i = 0; $i < 64; $i++) {
+            $apikey .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        $apikey = base64_encode(sha1(uniqid('ue' . rand(rand(), rand())) . $apikey));
+        $this->apiKey = $apikey;
+        $this->apiKeyExpires = (new \DateTime())->modify("+1 hour");
+    }
+
+    private function isApiKeyExpired()
+    {
+        if ($this->apiKeyExpires == null
+            || $this->apiKeyExpires->getTimestamp()-time() > 3600
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function prolongApiKeyExpiration()
+    {
+        $this->apiKeyExpires->modify("+1 hour");
     }
 }

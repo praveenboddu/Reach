@@ -2,6 +2,7 @@
 
 namespace UserBundle\Provider;
 
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -21,9 +22,8 @@ class UserProvider implements UserProviderInterface
     {
         $q = $this->userRepository
             ->createQueryBuilder('u')
-            ->where('u.username = :username OR u.email = :email')
+            ->where('u.username = :username')
             ->setParameter('username', $username)
-            ->setParameter('email', $username)
             ->getQuery();
 
         try {
@@ -33,7 +33,7 @@ class UserProvider implements UserProviderInterface
                 'Unable to find an active admin UserBundle:User object identified by "%s".',
                 $username
             );
-            throw new UsernameNotFoundException($message, 0, $e);
+            throw new TokenNotFoundException($message, 0, $e);
         }
 
         return $user;

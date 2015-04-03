@@ -6,3 +6,6 @@ locale:
     type: rest
     resource: BeaconBundle\Controller\LocaleController
     prefix: /v1/
+security:
+    resource: BeaconBundle\Controller\SecurityController
+    prefix: /v1/
