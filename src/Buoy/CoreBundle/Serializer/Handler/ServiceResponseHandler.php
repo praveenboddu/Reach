@@ -23,7 +23,6 @@ class ServiceResponseHandler implements SubscribingHandlerInterface
 	*/
 	public static function getSubscribingMethods()
 	{
-		var_dump('im here');
 		return array(
 			array(
 				'direction' => GraphNavigator::DIRECTION_SERIALIZATION,

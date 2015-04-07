@@ -1,69 +1,21 @@
-Symfony Standard Edition
+Reach
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
-
-What's inside?
+How to authenticate via API
 --------------
+Send POST request to http://reach.local/v1/auth providing ```username``` and ```password``` fields. In the response there should be "apikey" field. Then use this apikey for API requests: ```reach.local/v1/beacons?apikey=```
 
-The Symfony Standard Edition is configured with the following defaults:
+How to set up OAuth authorization (old, inactive)
+--------------
+```php app/console acme:oauth-server:client:create --redirect-uri="http://reach.local/" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials"```
 
-  * An AppBundle you can use to start coding;
+Where ```http://reach.local/``` should be replaced with the site address
 
-  * Twig as the only configured template engine;
+Keep those public_id and secret somewhere private, since that’s the credentials for the client application to access your backend using oauth.
 
-  * Doctrine ORM/DBAL;
+Check if it works: 
+    Execute in browser: ```http://reach.local/app_dev.php/oauth/v2/token?client_id=&client_secret=&grant_type=client_credentials``` You have to copy/paste client id and secret to url parameters. 
+    
+If you see response like this one, then we did everything correctly: ```{"access_token":"YTk0YTVjZDY0YWI2ZmE0NjRiODQ4OWIyNjZkNjZlMTdiZGZlNmI3MDNjZGQwYTZkMDNiMjliNDg3NWYwZWI0MQ","expires_in":3600,"token_type":"bearer","scope":"user","refresh_token":"ZDU1MDY1OTc4NGNlNzQ5NWFiYTEzZTE1OGY5MWNjMmViYTBiNmRjOTNlY2ExNzAxNWRmZTM1NjI3ZDkwNDdjNQ"}```
 
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.6/book/installation.html
-[6]:  http://symfony.com/doc/2.6/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.6/book/doctrine.html
-[8]:  http://symfony.com/doc/2.6/book/templating.html
-[9]:  http://symfony.com/doc/2.6/book/security.html
-[10]: http://symfony.com/doc/2.6/cookbook/email.html
-[11]: http://symfony.com/doc/2.6/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.6/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.6/bundles/SensioGeneratorBundle/index.html
+Then, you can access API providing access_token as a parameter: ```http://reach.local/v1/beaconevents?access_token=Yjk0YTFjZDFlYTIzMzhmZmEzNzAwYzM2NzhlNzg0MjM4Nzc1ZjcwMWIwOWM0OTk3NTFkNjEzNjEyMTBhOTA4Mw```
