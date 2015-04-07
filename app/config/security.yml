@@ -12,21 +12,49 @@ security:
             memory:
                 users:
                     admin: { password: adminpass, roles: ROLE_ADMIN}
+        api_key_user_provider:
+            id: api_key_user_provider
         user_db:
-            entity: { class: UserBundle:User, property: username }
+            id: platform.user.provider
+
     firewalls:
-        main:
-            pattern: /.*
-            form_login:
-                login_path: /login
-                check_path: /login_check
-                default_target_path: /
-            logout:
-                path: /logout
-                target: /
-            security: true
-            anonymous: true
+        api_login:
+            pattern: ^/v1/auth
+            security: false
+        wsse_secured:
+            pattern:   ^/v1
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
+
+#        oauth_token:
+#            pattern:    ^/oauth/v2/token
+#            security:   false
+#        oauth_authorize:
+#            pattern:    ^/oauth/v2/auth
+#            form_login:
+#                provider: user_db
+#                check_path: _security_check
+#                login_path: _demo_login
+#            anonymous: true
+#        api:
+#            pattern:    ^/v1
+#            fos_oauth:  true
+#            stateless:  true
+#            anonymous:  false # can be omitted as its default value
+#        main:
+#            pattern: /.*
+#            form_login:
+#                login_path: /login
+#                check_path: /login_check
+#                default_target_path: /
+#            logout:
+#                path: /logout
+#                target: /
+#            security: true
+#            anonymous: true
     access_control:
+        - { path: ^/v1, roles: [ IS_AUTHENTICATED_FULLY ] }
         - { path: /login, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /user, roles:  ROLE_ADMIN }
         - { path: /.*, roles:  IS_AUTHENTICATED_ANONYMOUSLY }

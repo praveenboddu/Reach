@@ -20,12 +20,14 @@ class AppKernel extends Kernel
             new ScoutBundle\ScoutBundle(),
             new UserBundle\UserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BeaconBundle\BeaconBundle(),
             new BeaconEventBundle\BeaconEventBundle(),
             new Buoy\LocaleBundle\BuoyLocaleBundle(),
             new Buoy\CoreBundle\BuoyCoreBundle(),
             new Buoy\AudienceBundle\BuoyAudienceBundle(),
+            new OAuthServerBundle\OAuthServerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

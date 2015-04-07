@@ -54,7 +54,7 @@ class Locale
      *
      * @ORM\Column(name="created", type="datetime")
      * @Constraints\NotBlank
-     * @COnstraints\DateTime()
+     * @Constraints\DateTime()
      */
     private $created;
 

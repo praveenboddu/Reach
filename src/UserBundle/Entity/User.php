@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class User implements UserInterface
 {
@@ -36,6 +36,23 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt;
+
+    /**
+     * @var string ApiKey
+     *
+     * @ORM\Column(name="api_key", type="string", length=128, nullable=true)
+     */
+    private $apiKey;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
     /**
      * Get id
@@ -93,9 +110,19 @@ class User implements UserInterface
         return $this->password;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSalt()
     {
-        return null;
+        return $this->salt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
     }
 
     //Roles if need be
@@ -104,8 +131,36 @@ class User implements UserInterface
         return array('ROLE_USER');
     }
 
+    /**
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
     public function eraseCredentials()
     {
 
     }
+
+    public function refreshToken()
+    {
+        if ($this->apiKey == null) {
+            $this->generateApiKey();
+        }
+    }
+
+
+    private function generateApiKey()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $apikey = '';
+        for ($i = 0; $i < 64; $i++) {
+            $apikey .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        $apikey = base64_encode(sha1(uniqid('ue' . rand(rand(), rand())) . $apikey));
+        $this->apiKey = $apikey;
+    }
+
 }
