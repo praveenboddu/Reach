@@ -12,12 +12,7 @@ class CreateClientCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-<<<<<<< HEAD
-            ->setName('buoy:oauth-server:client:create')
-=======
-            ->setName('acme:oauth-server:client:create')
->>>>>>> 21985b26d0516220a6ddffe956ffed141c11ef59
+        $this->setName('buoy:oauth-server:client:create')
             ->setDescription('Creates a new client')
             ->addOption(
                 'redirect-uri',
