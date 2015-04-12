@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
             new BeaconBundle\BeaconBundle(),
             new BeaconEventBundle\BeaconEventBundle(),
             new Buoy\LocaleBundle\BuoyLocaleBundle(),
