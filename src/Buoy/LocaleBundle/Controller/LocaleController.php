@@ -24,7 +24,17 @@ class LocaleController extends FOSRestController implements ClassResourceInterfa
 
     public function postAction(Request $request)
     {
-    	$postData = $request->request->all();
+    	var_dump('im here');
+        die;
+        $postData = $request->request->all();
+
+        $result = $this->container
+            ->get('bazinga_geocoder.geocoder')
+            ->using('google_maps')
+            ->geocode($postData['address']);
+
+        var_dump($result);
+        die;
 
     	$localeService = $this->container->get('locale.service');
     	return $localeService->create($postData);

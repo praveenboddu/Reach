@@ -87,3 +87,34 @@ fos_oauth_server:
         user_provider: platform.user.provider
         options:
             supported_scopes: user
+
+bazinga_geocoder:
+    fake_ip:
+        enabled:              true
+        ip:                   null
+        priority:             0
+    adapter:
+        class:                null
+    providers:
+        google_maps:
+            locale:               null
+            region:               null
+            use_ssl:              false
+            api_key:              null
+        openstreetmap:
+            locale:               null
+        host_ip:              []
+        geoip:                []
+        free_geo_ip:          []
+        oiorest:              []
+        geocoder_ca:          []
+        geocoder_us:          []
+        data_science_toolkit:  []
+        yandex:
+            locale:               null
+            toponym:              null
+        geo_ips:
+            api_key:              null
+        geo_plugin:           []
+        chain:
+            providers:            []
