@@ -10,11 +10,11 @@ scout_core:
     prefix:   /
 
 beacon_event:
-    resource: "@BeaconEventBundle/Resources/config/routing.yml"
+    resource: "@BuoyBeaconEventBundle/Resources/config/routing.yml"
     prefix:   /
 
 beacon:
-    resource: "@BeaconBundle/Resources/config/routing.yml"
+    resource: "@BuoyBeaconBundle/Resources/config/routing.yml"
     prefix:   /
 
 user:

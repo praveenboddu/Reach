@@ -1,0 +1,4 @@
+services:
+    beacon.service:
+        class: Buoy\BeaconBundle\Service\BeaconService
+        arguments: [@doctrine.orm.entity_manager]

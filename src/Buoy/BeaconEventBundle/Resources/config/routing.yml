@@ -1,0 +1,4 @@
+beacon_event:
+    type: rest
+    resource: Buoy\BeaconEventBundle\Controller\BeaconEventController
+    prefix: /v1/

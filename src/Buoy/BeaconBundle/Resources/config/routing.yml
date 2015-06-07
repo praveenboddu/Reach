@@ -1,0 +1,8 @@
+beacon:
+    type: rest
+    resource: Buoy\BeaconBundle\Controller\BeaconController
+    prefix: /v1/
+security:
+    resource: Buoy\BeaconBundle\Controller\SecurityController
+    prefix: /v1/
+    type: rest

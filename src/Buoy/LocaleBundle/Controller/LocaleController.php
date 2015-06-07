@@ -32,6 +32,6 @@ class LocaleController extends FOSRestController implements ClassResourceInterfa
         $geocoder = $this->get('geocoder.address');
         $address = $geocoder->getGeocodedData($postData['address']);
     	$localeService = $this->container->get('locale.service');
-    	return $localeService->create($postData, $address);
+    	return $localeService->create($postData, array($address[0]));
     }
 }
